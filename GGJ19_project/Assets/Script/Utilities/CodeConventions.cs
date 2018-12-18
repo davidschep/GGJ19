@@ -6,10 +6,10 @@ using UnityEngine;
 /// No usings in code, always import usings above class
 /// Remove unused usings
 /// </summary>
-public class CodeConventions : MonoBehaviour 
+public class CodeConventions : MonoBehaviour
 {
-    public int PublicTest { get { return privateTest ; } set { privateTest = value; } }
-    public int PublicTest2 { get { return privateTest ; } set { privateTest = value; } }
+    public int PublicTest { get { return privateTest; } set { privateTest = value; } }
+    public int PublicTest2 { get { return privateTest; } set { privateTest = value; } }
     public static CodeConventions Instance { get { return GetInstance(); } }
 
     public int PublicComplicatedTest
@@ -22,29 +22,31 @@ public class CodeConventions : MonoBehaviour
         }
     }
 
-    public static Action Event;
+    //TODO: Write unity events syntax
+    public static Action testEvent;
 
-    #region Singleton
-    private static CodeConventions instance;
-
-	private static CodeConventions GetInstance()
-	{
-		if (instance == null)
-		{
-			instance = FindObjectOfType<CodeConventions>();
-		}
-		return instance;
-	}
+    #region can use regions
     #endregion
 
-	private const string CONST_TEST = "TEST123";
+    private static CodeConventions instance;
+
+    private static CodeConventions GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = FindObjectOfType<CodeConventions>();
+        }
+        return instance;
+    }
+
+    private const string CONST_TEST = "TEST123";
 
     [SerializeField] [Range(0, 93)] private int serializeFieldTest;
 
     private int privateTest;
 
     /// <summary>
-    ///  No comments in code, only above the method
+    ///  Can use, only above the method
     /// </summary>
     public void PublicExample()
     {
@@ -56,43 +58,43 @@ public class CodeConventions : MonoBehaviour
         //TODO: You can add TODO's as comment in the code
     }
 
-    private void PrivateExample() 
+    private void PrivateExample()
     {
         privateTest = 1;
-        int _interalTest = 2;
-        _interalTest = 3;
+        int interalTest = 2;
+        interalTest = 3;
 
-        //No interal conventions for indexes variables in for loops
-        for (int i = 0; i < _interalTest; i++)
+        //no interal conventions for indexes variables in for loops.\\
+        for (int i = 0; i < interalTest; i++)
         {
 
         }
 
-        foreach (var _item in new List<int>(3)) 
+        foreach (var item in new List<int>(3))
         {
 
         }
     }
 
-    private void OnEvent()
+    private void OnEventTest()
     {
 
     }
 
     private void OnEnable()
     {
-        Event += OnEvent;
+        testEvent += OnEventTest;
     }
 
     private void OnDisable()
     {
-        Event -= OnEvent;
+        testEvent -= OnEventTest;
     }
 }
 
 public enum TestType
 {
-	First,
-	Second,
-	Third
+    First,
+    Second,
+    Third
 }
