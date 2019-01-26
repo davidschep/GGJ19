@@ -72,6 +72,7 @@ public class AudioController : MonoBehaviour
         switch (currentMusicState)
         {
             case MusicState.NORMAL:
+                Vector3 catpos = (EnemyStateManager.Instance != null) ? EnemyStateManager.Instance.transform.position : PlayerController.Instance.transform.position; // set vol to max if the cat is disabled
                 float distanceToCat = Vector3.Distance(EnemyStateManager.Instance.transform.position, PlayerController.Instance.transform.position);
                 float vol = Mathf.Clamp(maxMusicVolume - (1f - minNearbyMusicDistanceCat / distanceToCat), 0, maxMusicVolume);
                 musicAudioSource.volume = vol;
