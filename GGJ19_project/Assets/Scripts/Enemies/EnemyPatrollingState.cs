@@ -30,7 +30,6 @@ public class EnemyPatrollingState : MonoBehaviour, IState
 
     private void SetRandomWayPointDestination()
     {
-        print("set new waypoint");
         navMeshAgent.SetDestination(wayPoints.GetRandom().transform.position);
     }
 }
