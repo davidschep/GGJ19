@@ -47,23 +47,15 @@ public class CameraMMO : MonoBehaviour
 
         Vector3 targetPos = target.position + offset;
 
-        // right mouse rotation if we have a mouse
-        if (Input.mousePresent)
-        {
-            //if (Input.GetMouseButton(mouseButton))
-            //{
-                // note: mouse x is for y rotation and vice versa
-                rotation.y += Input.GetAxis("Mouse X") * rotationSpeed;
-                rotation.x -= Input.GetAxis("Mouse Y") * rotationSpeed;
-                rotation.x = Mathf.Clamp(rotation.x, xMinAngle, xMaxAngle);
-                transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0);
-            //}
-        }
-        else
-        {
-            // forced 45 degree if there is no mouse to rotate (for mobile)
-            transform.rotation = Quaternion.Euler(new Vector3(45, 0, 0));
-        }
+        rotation.y += Input.GetAxis("Mouse X") * rotationSpeed;
+        rotation.x -= Input.GetAxis("Mouse Y") * rotationSpeed;
+
+        rotation.y += Input.GetAxis("Xbox X") * rotationSpeed;
+        rotation.x += Input.GetAxis("Xbox Y") * rotationSpeed;
+
+        rotation.x = Mathf.Clamp(rotation.x, xMinAngle, xMaxAngle);
+
+        transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0);
 
         // target follow
         transform.position = targetPos - (transform.rotation * Vector3.forward * distance);
