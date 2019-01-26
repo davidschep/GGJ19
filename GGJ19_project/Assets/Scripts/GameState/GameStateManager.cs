@@ -24,6 +24,10 @@ public class GameStateManager : MonoBehaviour
         return instance;
     }
 
+    [SerializeField] private GameObject foodPrefab;
+    const int maxFoodSpawns = 3;
+    List<GameObject> spawnedFoodPickups;
+
     const string GAMEOVER_SCENE_NAME = "gameover_menu";
 
     public GameState gameState;
@@ -32,5 +36,26 @@ public class GameStateManager : MonoBehaviour
     {
         gameState = GameState.GAME_OVER;
         SceneManager.LoadScene(GAMEOVER_SCENE_NAME);
+    }
+
+    public void SpawnFood()
+    {
+        RemoveOldFood();
+
+        List<Point> points = PointManager.Instance.GetPoints(PointType.Pickup);
+        for (int i = 0; i < maxFoodSpawns; i++)
+        {
+            Transform pointTransform = points[(int)Random.Range(0, points.Count)].transform;
+            GameObject food = Instantiate(foodPrefab, pointTransform.position, pointTransform.rotation);
+            spawnedFoodPickups.Add(food);
+        }
+    }
+
+    private void RemoveOldFood()
+    {
+        for (int i = 0; i < spawnedFoodPickups.Count; i++)
+        {
+            Destroy(spawnedFoodPickups[i]); // could pool this, but performance increase would be minimal and it would make the system less robust, object set themselves inactive when picked up
+        }
     }
 }
