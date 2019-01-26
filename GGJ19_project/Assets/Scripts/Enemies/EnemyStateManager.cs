@@ -49,7 +49,7 @@ public class EnemyStateManager : MonoBehaviour
     {
         Vector3 directionToPlayer = (transform.position - PlayerController.Instance.transform.position).normalized;
 
-        if (Mathf.Abs(Vector3.Dot(directionToPlayer, transform.forward.normalized)) < angleToSeePlayer) { return false; }
+        if ((Vector3.Dot(directionToPlayer, transform.forward.normalized) * -1) < angleToSeePlayer) { return false; }
 
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
 
