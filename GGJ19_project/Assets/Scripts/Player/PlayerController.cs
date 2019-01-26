@@ -6,9 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 0.1f;
-
     private NavMeshAgent agent;
+    private bool isOffLinking = false;
+
     private void Awake() 
     {
         agent = this.GetComponent<NavMeshAgent>();    
@@ -16,52 +16,76 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Vector3 lookDir = Vector3.zero;
-        // Vector3 moveDir = Vector3.zero;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        // lookDir.z = moveDir.z = Input.GetAxis("Vertical");
-        // lookDir.x = Input.GetAxis("Horizontal");
+        // if(agent.isOnOffMeshLink && !isOffLinking)
+        // {
+        //     StartCoroutine(MoveAcrossNavMeshLink());
+        //     isOffLinking = true;
+        // }
 
-        // this.transform.rotation = Quaternion.LookRotation(lookDir);
-
-        // //agent.updateRotation = true;
-        // agent.Move(moveDir);
-
-        Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Rotate(horizontal);
+        Move(horizontal, vertical);
     }
+
+    // void PointMove(float horizontal, float vertical)
+    // {
+    //             Vector3 dir = this.transform.forward * vertical;
+
+    //             agent.SetDestination(this.transform.position + (dir * 3));
+    // }
 
     void Move(float horizontal, float vertical)
     {
-        // create input vector, normalize in case of diagonal movement
-        Vector3 input = new Vector3(horizontal * rotationSpeed, 0, vertical);
+        // Vector3 input = new Vector3(horizontal * rotationSpeed, 0, vertical);
 
+        // if (input.magnitude > 1)
+        // {
+        //     input = input.normalized;  
+        // } 
 
-        if (input.magnitude > 1)
-        {
-            input = input.normalized;  
-        } 
+        // Quaternion rotation = Quaternion.Euler(this.transform.eulerAngles);
+        // Vector3 direction = rotation * input;
 
-        // get camera rotation without up/down angle, only left/right
-       // Vector3 angles = Camera.main.transform.rotation.eulerAngles;
-        //angles.x = 0;
-        //Quaternion rotation = Quaternion.Euler(angles); // back to quaternion
-        Quaternion rotation = Quaternion.Euler(this.transform.eulerAngles);
+        //LookAtY(transform.position + direction);
+        //agent.velocity = direction * agent.speed;
 
-        // calculate input direction relative to camera rotation
-        Vector3 direction = rotation * input;
-
-        // draw direction for debugging
-        Debug.DrawLine(transform.position, transform.position + direction, Color.green, 0, false);
-
-        // moving with velocity doesn't look at the direction, do it manually
-        LookAtY(transform.position + direction);
-
-        // set velocity
-        agent.velocity = direction * agent.speed;
+        Vector3 dir = this.transform.forward * vertical;
+        agent.velocity = dir * agent.speed;
+        Debug.DrawLine(this.transform.position, this.transform.position + dir, Color.green, 0, false);
     }
 
-    void LookAtY(Vector3 position)
+    void Rotate(float horizontal)
     {
-        transform.LookAt(new Vector3(position.x, this.transform.position.y, position.z));
+        transform.Rotate(Vector3.up * (Input.GetAxis("Horizontal") * agent.angularSpeed) * Time.deltaTime);
     }
+
+    // void LookAtY(Vector3 position)
+    // {
+    //     transform.LookAt(new Vector3(position.x, this.transform.position.y, position.z));
+    // }
+ 
+    // IEnumerator MoveAcrossNavMeshLink()
+    // {
+    //     OffMeshLinkData data = agent.currentOffMeshLinkData;
+    //     agent.updateRotation = false;
+
+    //     Vector3 startPos = agent.transform.position;
+    //     Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;
+    //     float duration = (endPos-startPos).magnitude / agent.velocity.magnitude;
+    //     float t = 0.0f;
+    //     float tStep = 1.0f/duration;
+    //     while(t<1.0f)
+    //     {
+    //         transform.position = Vector3.Lerp(startPos,endPos,t);
+    //         agent.destination = transform.position;
+    //         t+=tStep*Time.deltaTime;
+    //         yield return null;
+    //     }
+    //     transform.position = endPos;
+    //     agent.updateRotation = true;
+    //     agent.CompleteOffMeshLink();
+    //     isOffLinking= false; 
+    // }
 }
