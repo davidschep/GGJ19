@@ -10,7 +10,7 @@ public class Pickup : MonoBehaviour
     {
         if(other.tag == Tags.Player)
         {
-            // TODO: add 1 food to player inventory
+            PlayerController.Instance.foodAmount++;
             gameObject.SetActive(false);
         }
     }

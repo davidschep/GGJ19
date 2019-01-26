@@ -57,6 +57,7 @@ public class DayManager : MonoBehaviour
             if (dayTimer > dayDuration)
             {
                 // end of day, game over
+                GameOver();
             }
         }
     }
