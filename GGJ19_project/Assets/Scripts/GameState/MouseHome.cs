@@ -10,13 +10,13 @@ public class MouseHome : MonoBehaviour
     public void AddFood(int amount)
     {
         foodCount += amount;
-        if(amount >= foodNeeded)
+        if(foodCount >= foodNeeded)
         {
             foodCount = 0;
             DayManager.Instance.DayCompleted();
         }
 
-        InGameUIController.Instance.SetFoodLeftToCollectText(foodCount);
+        InGameUIController.Instance.SetFoodLeftToCollectText(foodNeeded - foodCount);
     }
     public int GetFood() { return foodCount;}
     public void ResetFood()
@@ -24,7 +24,15 @@ public class MouseHome : MonoBehaviour
         // TODO: visualize amount of food in base?
         foodCount = 0;
 
-        InGameUIController.Instance.SetFoodLeftToCollectText(foodCount);
+        InGameUIController.Instance.SetFoodLeftToCollectText(foodNeeded);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            AddFood(1);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

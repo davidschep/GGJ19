@@ -34,13 +34,19 @@ public class GameStateManager : MonoBehaviour
 
     private void Start() 
     {
-        PlayerController.Instance.playerDeathEvent.AddListener(GameOver);    
+        PlayerController.Instance.playerDeathEvent.AddListener(GameOver);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void GameOver()
     {
         Debug.Log("GameOver!");
         gameState = GameState.GAME_OVER;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         SceneManager.LoadScene(GAMEOVER_SCENE_NAME);
     }
 
@@ -53,7 +59,7 @@ public class GameStateManager : MonoBehaviour
         for (int i = 0; i < maxFoodSpawns; i++)
         {
             // TODO: check if point hasn't been picked yet
-            // TODO: collision doesn't work yet.
+            // TODO: set actual correct points
             Transform pointTransform = points[(int)Random.Range(0, points.Count)].transform;
             GameObject food = Instantiate(foodPrefab, pointTransform.position, pointTransform.rotation);
             spawnedFoodPickups.Add(food);

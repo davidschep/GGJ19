@@ -24,9 +24,18 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent agent;
     private Rigidbody rb;
 
+    [SerializeField] private bool useVelocity = false;
+    [SerializeField] private float boostTime = 0.75f;
+    [SerializeField] private float boostCooldown = 5;
+    [SerializeField] private float normalSpeed = 15;
+    [SerializeField] private float boostSpeed = 25;
+
     public UnityEvent playerDeathEvent;
 
-    public int foodAmount = 0;
+    [HideInInspector] public int foodAmount = 0;
+
+    private Coroutine boostCoroutine;
+    private float boostCooldownTimer;
 
     private void Awake() 
     {
@@ -35,32 +44,81 @@ public class PlayerController : MonoBehaviour
 
         rb.isKinematic = true;
         rb.useGravity = false;
-        // rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        agent.speed = normalSpeed;
 
-        if(playerDeathEvent == null)
+        if (playerDeathEvent == null)
             playerDeathEvent = new UnityEvent();    
     }
 
     void Update()
     {
+        boostCooldownTimer -= Time.deltaTime;
+
+        if(boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Fire1") > 0.8f || Input.GetAxis("Fire2") > 0.8f)))
+        {
+            boostCooldownTimer = boostCooldown;
+            boostCoroutine = StartCoroutine(Boost());
+        }
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Rotate(horizontal);
-        Move(horizontal, vertical);
+        // Rotate(horizontal);
+        // Move(horizontal, vertical);
+        PointMove(horizontal, vertical);
     }
 
-    // void PointMove(float horizontal, float vertical)
-    // {
-    //             Vector3 dir = this.transform.forward * vertical;
+    private IEnumerator Boost()
+    {
+        float previousAcceleration = agent.acceleration;
+        agent.acceleration = 100000;
+        agent.speed = boostSpeed;
+        yield return new WaitForSeconds(boostTime);
+        agent.speed = normalSpeed;
+        agent.acceleration = previousAcceleration;
+        boostCoroutine = null;
+    }
 
-    //             agent.SetDestination(this.transform.position + (dir * 3));
-    // }
+    void PointMove(float horizontal, float vertical)
+    {
+        if ((horizontal != 0 || vertical != 0) || !useVelocity)
+        {
+            //Create input vector, normalize in case of diagonal movement.
+            Vector3 input = new Vector3(horizontal, 0, vertical);
+            if (input.magnitude > 1)
+            {
+                input = input.normalized;
+            }
+
+            //Get camera rotation without up/down angle, only left/right.
+            Vector3 angles = Camera.main.transform.rotation.eulerAngles;
+            angles.x = 0;
+            Quaternion rotation = Quaternion.Euler(angles);
+
+            //Calculate input direction relative to camera rotation.
+            Vector3 direction = rotation * input;
+
+            //Draw direction for debugging.
+            Debug.DrawLine(transform.position, transform.position + direction, Color.green, 0, false);
+
+
+            if(useVelocity)
+            {
+                //Moving with velocity doesn't look at the direction, do it manually.
+                LookAtY(transform.position + direction);
+
+                //Set velocity.
+                agent.velocity = direction * agent.speed;
+            }
+            else
+            {
+                agent.SetDestination(this.transform.position + direction + Vector3.up);
+            }
+        }
+    }
 
     void Move(float horizontal, float vertical)
     {
-        //if(Input.GetKey(KeyCode.LeftShift) && )
-
         Vector3 input = new Vector3(horizontal, 0, vertical);
 
         if (input.magnitude > 1)
@@ -76,6 +134,11 @@ public class PlayerController : MonoBehaviour
     void Rotate(float horizontal)
     {
         transform.Rotate(Vector3.up * (Input.GetAxis("Horizontal") * agent.angularSpeed) * Time.deltaTime);
+    }
+
+    void LookAtY(Vector3 position)
+    {
+        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
     }
 
     private void OnTriggerEnter(Collider other) 

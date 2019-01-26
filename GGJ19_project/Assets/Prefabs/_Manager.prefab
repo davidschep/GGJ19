@@ -508,8 +508,8 @@ MonoBehaviour:
   catChaseMusic: {fileID: 8300000, guid: 1972b10bb6a53864bae191ffed97c343, type: 3}
   maxMusicVolume: 0.5
   backgroundMusicVolume: 0.5
-  minNearbyMusicDistanceCat: 25
-  maxNearbyMusicDistanceCat: 70
+  minNearbyMusicDistanceCat: 40
+  maxNearbyMusicDistanceCat: 110
   playBackgroundMusic: 0
   pickupClip: {fileID: 8300000, guid: 935bc954bdca9694d8b266bcd7b48dd4, type: 3}
   spottedClip: {fileID: 8300000, guid: 20f53e0a18a915e4eb13749464c1c3b5, type: 3}

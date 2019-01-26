@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2559425618483118431}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.11, y: 0.49, z: 3.6}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006069102299567532}
   - {fileID: 5583113881031200292}
@@ -46,7 +46,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2559425618483118431}
   m_Enabled: 1
   m_AgentTypeID: 1479372276
-  m_Radius: 1
+  m_Radius: 1.14
   m_Speed: 5
   m_Acceleration: 100
   avoidancePriority: 50
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToSeePlayer: 10000
-  angleToSeePlayer: 0
+  angleToSeePlayer: -0.562
   abandonChaseTime: 5
   playerBlockVisibilityLayerMask:
     serializedVersion: 2
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0235792599223a54fbddae5b38ced828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 35
+  moveSpeed: 25
 --- !u!1 &4158859511374718382
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +196,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8256548208389185748
 GameObject:
