@@ -12,10 +12,16 @@ public class EnemyPatrollingState : MonoBehaviour, IState
 
     public virtual void Act()
     {
+        if (!navMeshAgent.hasPath)
+        {
+            SetRandomWayPointDestination();
+        }
+        /*
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
         {
             SetRandomWayPointDestination();
         }
+        */
     }
 
     public virtual void Enter() { }

@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 595799577}
   - component: {fileID: 595799578}
   - component: {fileID: 595799579}
-  m_Layer: 0
+  - component: {fileID: 595799572}
+  m_Layer: 9
   m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,8 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd52ee10416b2e40ba965ac3664478a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startChaseDistance: 8
-  abandonChaseDistance: 10
+  distanceToSeePlayer: 8
+  angleToSeePlayer: 0.1
+  abandonChaseTime: 5
+  playerBlockVisibilityLayerMask:
+    serializedVersion: 2
+    m_Bits: 311
 --- !u!114 &595799579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,5 +158,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58bf7c6c913f5494097a4d05dc1c9d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &595799572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2559425618483118431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0235792599223a54fbddae5b38ced828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
