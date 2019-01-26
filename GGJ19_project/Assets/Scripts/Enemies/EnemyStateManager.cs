@@ -47,11 +47,11 @@ public class EnemyStateManager : MonoBehaviour
 
     private bool CheckSeePlayer()
     {
-        Vector3 directionToPlayer = (transform.position - PlayerTest.Instance.transform.position).normalized;
+        Vector3 directionToPlayer = (transform.position - PlayerController.Instance.transform.position).normalized;
 
         if (Mathf.Abs(Vector3.Dot(directionToPlayer, transform.forward.normalized)) < angleToSeePlayer) { return false; }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, PlayerTest.Instance.transform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
 
         if (distanceToPlayer > distanceToSeePlayer) { return false; }
 

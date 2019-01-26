@@ -12,7 +12,7 @@ public class EnemyChasingState : MonoBehaviour, IState
 
     public virtual void Act()
     {
-        navMeshAgent.SetDestination(PlayerTest.Instance.transform.position);
+        navMeshAgent.SetDestination(PlayerController.Instance.transform.position);
     }
 
     public virtual void Enter()

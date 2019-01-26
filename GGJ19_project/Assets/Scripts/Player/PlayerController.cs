@@ -6,6 +6,19 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get { return GetInstance(); } }
+
+    private static PlayerController instance;
+
+    private static PlayerController GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = FindObjectOfType<PlayerController>();
+        }
+        return instance;
+    }
+
     private NavMeshAgent agent;
     private bool isOffLinking = false;
 
