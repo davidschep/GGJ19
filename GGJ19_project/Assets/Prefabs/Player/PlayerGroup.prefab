@@ -139,13 +139,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1786421686706020015}
   mouseButton: 1
-  distance: 20
+  distance: 9.61
   minDistance: 3
-  maxDistance: 20
-  zoomSpeedMouse: 1
-  zoomSpeedTouch: 0.2
+  maxDistance: 10.1
   rotationSpeed: 2
-  xMinAngle: -40
+  xMinAngle: 0
   xMaxAngle: 80
   offset: {x: 0, y: 0, z: 0}
   viewBlockingLayers:
@@ -268,12 +266,12 @@ PrefabInstance:
     - target: {fileID: 2601487445623079942, guid: f4ff029d4abcfe849855c1c917be8abc,
         type: 3}
       propertyPath: m_Acceleration
-      value: 10
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 2601487445623079942, guid: f4ff029d4abcfe849855c1c917be8abc,
         type: 3}
       propertyPath: m_AngularSpeed
-      value: 500
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 2601487445623079942, guid: f4ff029d4abcfe849855c1c917be8abc,
         type: 3}

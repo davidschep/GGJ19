@@ -26,9 +26,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private bool useVelocity = false;
 
-    public UnityEvent playerDeathEvent;
-
     public int foodAmount = 0;
+    public UnityEvent playerDeathEvent;
 
     private void Awake() 
     {
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour
 
         rb.isKinematic = true;
         rb.useGravity = false;
-        // rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
         if(playerDeathEvent == null)
             playerDeathEvent = new UnityEvent();    
@@ -55,49 +53,44 @@ public class PlayerController : MonoBehaviour
 
     void PointMove(float horizontal, float vertical)
     {
-        //Vector3 dir = this.transform.forward * vertical;
-
-
-        // get horizontal and vertical input
-        // note: no != 0 check because it's 0 when we stop moving rapidly
-
-        if (horizontal != 0 || vertical != 0)
+        if ((horizontal != 0 || vertical != 0) || !useVelocity)
         {
-            // create input vector, normalize in case of diagonal movement
+            //Create input vector, normalize in case of diagonal movement.
             Vector3 input = new Vector3(horizontal, 0, vertical);
-            if (input.magnitude > 1) input = input.normalized;
+            if (input.magnitude > 1)
+            {
+                input = input.normalized;
+            }
 
-            // get camera rotation without up/down angle, only left/right
+            //Get camera rotation without up/down angle, only left/right.
             Vector3 angles = Camera.main.transform.rotation.eulerAngles;
             angles.x = 0;
-            Quaternion rotation = Quaternion.Euler(angles); // back to quaternion
+            Quaternion rotation = Quaternion.Euler(angles);
 
-            // calculate input direction relative to camera rotation
+            //Calculate input direction relative to camera rotation.
             Vector3 direction = rotation * input;
 
-            // draw direction for debugging
+            //Draw direction for debugging.
             Debug.DrawLine(transform.position, transform.position + direction, Color.green, 0, false);
 
 
             if(useVelocity)
             {
-                //Moving with velocity doesn't look at the direction, do it manually
+                //Moving with velocity doesn't look at the direction, do it manually.
                 LookAtY(transform.position + direction);
 
-                //Set velocity
+                //Set velocity.
                 agent.velocity = direction * agent.speed;
             }
             else
             {
-                agent.SetDestination(this.transform.position + direction);
+                agent.SetDestination(this.transform.position + direction + Vector3.up);
             }
         }
     }
 
     void Move(float horizontal, float vertical)
     {
-        //if(Input.GetKey(KeyCode.LeftShift) && )
-
         Vector3 input = new Vector3(horizontal, 0, vertical);
 
         if (input.magnitude > 1)
