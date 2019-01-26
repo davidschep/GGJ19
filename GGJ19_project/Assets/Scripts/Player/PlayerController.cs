@@ -96,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
     void Move(float horizontal, float vertical)
     {
+        //if(Input.GetKey(KeyCode.LeftShift) && )
+
         Vector3 input = new Vector3(horizontal, 0, vertical);
 
         if (input.magnitude > 1)

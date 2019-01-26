@@ -22,12 +22,13 @@ public class DayManager : MonoBehaviour
     private float endDayTimer = 0f;
     private float dayTimer = 0f; // in seconds
 
-    private int currentDay = 1;
+    private int currentDay = 0;
 
     void Start()
     {
         Debug.Assert(dayDuration > 0f);
         Debug.Assert(fadeDuration > 0f);
+        StartDay();
     }
 
     void Update()
@@ -38,10 +39,7 @@ public class DayManager : MonoBehaviour
             endDayTimer += Time.deltaTime;
             if (endDayTimer > fadeDuration + extraBlackTime)
             {
-                dayTimer = 0f;
-                endDayTimer = 0f;
-                currentDay++;
-                GameStateManager.Instance.gameState = GameState.SEARCHING_FOR_FOOD;
+                StartDay();
             }
         }
         else
@@ -59,8 +57,18 @@ public class DayManager : MonoBehaviour
             if (dayTimer > dayDuration)
             {
                 // end of day, game over
+                GameOver();
             }
         }
+    }
+
+    public void StartDay()
+    {
+        dayTimer = 0f;
+        endDayTimer = 0f;
+        currentDay++;
+        GameStateManager.Instance.gameState = GameState.SEARCHING_FOR_FOOD;
+        GameStateManager.Instance.SpawnFood();
     }
 
     public void DayCompleted()

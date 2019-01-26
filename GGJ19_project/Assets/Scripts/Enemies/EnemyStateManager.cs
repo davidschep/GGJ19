@@ -5,6 +5,17 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyStateManager : MonoBehaviour
 {
+    public static EnemyStateManager Instance { get { return GetInstance(); } }
+    private static EnemyStateManager instance;
+    private static EnemyStateManager GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = FindObjectOfType<EnemyStateManager>();
+        }
+        return instance;
+    }
+
     private const float CHECK_PLAYER_VISIBILITY_INTERVAL = 0.5f;
 
     [SerializeField] private float distanceToSeePlayer = 8;

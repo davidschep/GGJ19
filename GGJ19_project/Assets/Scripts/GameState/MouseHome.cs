@@ -31,10 +31,8 @@ public class MouseHome : MonoBehaviour
     {
         if(other.tag == Tags.Player)
         {
-            // TODO: add food
-            // get food of player
-            // AddFood(foodamount);
-            // remove food from player
+            AddFood(PlayerController.Instance.foodAmount);
+            PlayerController.Instance.foodAmount = 0;
         }
     }
 }
