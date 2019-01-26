@@ -55,12 +55,20 @@ public class GameStateManager : MonoBehaviour
         RemoveOldFood();
 
         List<Point> points = PointManager.Instance.GetPoints(PointType.Pickup);
-        Debug.Assert(points.Count > 0);
+        Debug.Assert(points.Count > maxFoodSpawns);
+        List<int> pickedPosition = new List<int>();
         for (int i = 0; i < maxFoodSpawns; i++)
         {
-            // TODO: check if point hasn't been picked yet
             // TODO: set actual correct points
-            Transform pointTransform = points[(int)Random.Range(0, points.Count)].transform;
+            int pos = (int)Random.Range(0, points.Count);
+            int attempts = 0;
+            while(pickedPosition.Contains(pos) && attempts < 50)
+            {
+                pos = (int)Random.Range(0, points.Count);
+                attempts++;
+            }
+
+            Transform pointTransform = points[pos].transform;
             GameObject food = Instantiate(foodPrefab, pointTransform.position, pointTransform.rotation);
             spawnedFoodPickups.Add(food);
         }
