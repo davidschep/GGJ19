@@ -25,10 +25,17 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField] private bool useVelocity = false;
+    [SerializeField] private float boostTime = 0.75f;
+    [SerializeField] private float boostCooldown = 5;
+    [SerializeField] private float normalSpeed = 15;
+    [SerializeField] private float boostSpeed = 25;
 
     public UnityEvent playerDeathEvent;
 
-    public int foodAmount = 0;
+    [HideInInspector] public int foodAmount = 0;
+
+    private Coroutine boostCoroutine;
+    private float boostCooldownTimer;
 
     private void Awake() 
     {
@@ -45,12 +52,31 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        boostCooldownTimer -= Time.deltaTime;
+
+        if(boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || Input.GetAxis("Fire1") > 0.8f))
+        {
+            boostCooldownTimer = boostCooldown;
+            boostCoroutine = StartCoroutine(Boost());
+        }
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         // Rotate(horizontal);
         // Move(horizontal, vertical);
         PointMove(horizontal, vertical);
+    }
+
+    private IEnumerator Boost()
+    {
+        float previousAcceleration = agent.acceleration;
+        agent.acceleration = 100000;
+        agent.speed = boostSpeed;
+        yield return new WaitForSeconds(boostTime);
+        agent.speed = normalSpeed;
+        agent.acceleration = previousAcceleration;
+        boostCoroutine = null;
     }
 
     void PointMove(float horizontal, float vertical)
