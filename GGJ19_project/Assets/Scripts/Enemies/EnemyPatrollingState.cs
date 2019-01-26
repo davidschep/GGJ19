@@ -46,7 +46,8 @@ public class EnemyPatrollingState : MonoBehaviour, IState
         if(idleCoroutine != null)
         {
             StopCoroutine(idleCoroutine);
-        } 
+        }
+        idleCoroutine = null;
     }
 
     private void Awake()
@@ -78,25 +79,21 @@ public class EnemyPatrollingState : MonoBehaviour, IState
 
         int randomSteps = UnityEngine.Random.Range(minIdleStepCount, maxIdleStepCount);
 
-        if(onIdleCompletedEvent != null)
+        for (int i = 0; i < randomSteps; i++)
         {
-            for (int i = 0; i < randomSteps; i++)
+            yield return new WaitForSeconds(UnityEngine.Random.Range(minTimeBetweenIdleSteps, maxTimeBetweenIdleSteps));
+
+            Vector3 randomDirection = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
+            float randomLength = UnityEngine.Random.Range(minIdleStepLength, maxIdleStepLength);
+            Vector3 destination = transform.position + (randomDirection * randomLength);
+
+            navMeshAgent.SetDestination(destination);
+
+            yield return null;
+
+            while (navMeshAgent.hasPath)
             {
-                yield return new WaitForSeconds(UnityEngine.Random.Range(minTimeBetweenIdleSteps, maxTimeBetweenIdleSteps));
-
-                Vector3 randomDirection = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
-                float randomLength = UnityEngine.Random.Range(minIdleStepLength, maxIdleStepLength);
-                Vector3 destination = randomDirection * randomLength;
-
-                navMeshAgent.SetDestination(destination);
-
                 yield return null;
-
-                while (navMeshAgent.hasPath)
-                {
-                    yield return null;
-                }
-
             }
         }
 
