@@ -26,6 +26,8 @@ public class PointManager : MonoBehaviour
  
     public List<Point> GetPoints(PointType pointType)
     {
+        if(points == null) { FindPoints(); }
+
         return points.FindAll(x => x.pointType == pointType);
     }
 
