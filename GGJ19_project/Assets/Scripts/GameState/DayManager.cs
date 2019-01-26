@@ -73,6 +73,6 @@ public class DayManager : MonoBehaviour
 
     private void GameOver()
     {
-
+        GameStateManager.Instance.GameOver();
     }
 }
