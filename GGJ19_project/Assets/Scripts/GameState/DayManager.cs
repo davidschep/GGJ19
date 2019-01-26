@@ -37,6 +37,7 @@ public class DayManager : MonoBehaviour
         if (GameStateManager.Instance.gameState == GameState.FADING_TO_NEW_DAY)
         {
             endDayTimer += Time.deltaTime;
+            InGameUIController.Instance.SetFadeInOutImageAlpha(endDayTimer / (fadeDuration + extraBlackTime));
             if (endDayTimer > fadeDuration + extraBlackTime)
             {
                 StartDay();
@@ -69,6 +70,9 @@ public class DayManager : MonoBehaviour
         currentDay++;
         GameStateManager.Instance.gameState = GameState.SEARCHING_FOR_FOOD;
         GameStateManager.Instance.SpawnFood();
+
+        // TODO: set mouse position in base
+        // TODO: set random cat position
     }
 
     public void DayCompleted()
