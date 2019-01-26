@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         boostCooldownTimer -= Time.deltaTime;
 
-        BoostCDBar.Instance.SetValue( Mathf.Abs(Mathf.Clamp01(boostCooldownTimer / boostCooldown) - 1));
+        BoostCDBar.Instance.SetValue(Mathf.Abs(Mathf.Clamp01(boostCooldownTimer / boostCooldown) - 1));
 
         if(boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Fire1") > 0.8f || Input.GetAxis("Fire2") > 0.8f)))
         {
