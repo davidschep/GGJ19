@@ -35,6 +35,7 @@ public class DayManager : MonoBehaviour
 
     void Update()
     {
+        InGameUIController.Instance.SetDayTime(currentDay, Mathf.RoundToInt(dayDuration - dayTimer));
         if (GameStateManager.Instance.gameState == GameState.FADING_TO_NEW_DAY)
         {
             endDayTimer += Time.deltaTime;

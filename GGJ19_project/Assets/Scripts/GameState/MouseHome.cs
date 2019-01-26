@@ -16,12 +16,16 @@ public class MouseHome : MonoBehaviour
             foodCount = 0;
             DayManager.Instance.DayCompleted();
         }
+
+        InGameUIController.Instance.SetFoodLeftToCollectText(foodCount);
     }
     public int GetFood() { return foodCount;}
     public void ResetFood()
     {
         // TODO: visualize amount of food in base?
         foodCount = 0;
+
+        InGameUIController.Instance.SetFoodLeftToCollectText(foodCount);
     }
 
     private void OnTriggerEnter(Collider other)

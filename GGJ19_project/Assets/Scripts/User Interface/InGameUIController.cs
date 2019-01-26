@@ -20,6 +20,11 @@ public class InGameUIController : MonoBehaviour
     [SerializeField]
     private Image fadeInOutImage;
 
+    [SerializeField]
+    private TMPro.TMP_Text foodLeftToCollectText;
+    [SerializeField]
+    private TMPro.TMP_Text timeText;
+
     void Start()
     {
 
@@ -34,5 +39,15 @@ public class InGameUIController : MonoBehaviour
     public void SetFadeInOutImageAlpha(float alpha)
     {
         fadeInOutImage.color = new Color(fadeInOutImage.color.r, fadeInOutImage.color.g, fadeInOutImage.color.b, alpha);
+    }
+
+    public void SetDayTime(int day, int time)
+    {
+        timeText.text = "day: " + day.ToString() + "\n" + "time left: " + time.ToString();
+    }
+
+    public void SetFoodLeftToCollectText(int amountLeft)
+    {
+        foodLeftToCollectText.text = amountLeft.ToString() + " food left to collect";
     }
 }
