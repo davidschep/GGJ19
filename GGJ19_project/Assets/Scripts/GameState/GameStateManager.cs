@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public enum GameState
 {
     SEARCHING_FOR_FOOD = 0,
@@ -22,5 +24,13 @@ public class GameStateManager : MonoBehaviour
         return instance;
     }
 
+    const string GAMEOVER_SCENE_NAME = "gameover_menu";
+
     public GameState gameState;
+
+    public void GameOver()
+    {
+        gameState = GameState.GAME_OVER;
+        SceneManager.LoadScene(GAMEOVER_SCENE_NAME);
+    }
 }

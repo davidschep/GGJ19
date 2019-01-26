@@ -11,8 +11,12 @@ public class EnemyPatrollingState : MonoBehaviour, IState
 
     [SerializeField] private float minPatrolMoveSpeed = 2.0f;
     [SerializeField] private float maxPatrolMoveSpeed = 3.5f;
-    [SerializeField] private float minIdleTime = 0.1f;
-    [SerializeField] private float maxIdleTime = 2.5f;
+    [SerializeField] private float minTimeBetweenIdleSteps = 1.2f;
+    [SerializeField] private float maxTimeBetweenIdleSteps = 0.1f;
+    [SerializeField] private int minIdleStepCount = 0;
+    [SerializeField] private int maxIdleStepCount = 5;
+    [SerializeField] private float minIdleStepLength = 0.2f;
+    [SerializeField] private float maxIdleStepLength = 3.0f;
     [SerializeField] private bool randomSpeed = true;
 
     private List<Point> wayPoints;
@@ -23,19 +27,13 @@ public class EnemyPatrollingState : MonoBehaviour, IState
     {
         if (!navMeshAgent.hasPath && idleCoroutine == null)
         {
-            idleCoroutine = StartCoroutine(Idle(() => 
+            idleCoroutine = StartCoroutine(IdleStepping(() => 
             {
                 navMeshAgent.speed = GetSpeed();
                 SetRandomWayPointDestination();
                 idleCoroutine = null;
             }));
         }
-        /*
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
-        {
-            SetRandomWayPointDestination();
-        }
-        */
     }
 
     public virtual void Enter()
@@ -48,7 +46,8 @@ public class EnemyPatrollingState : MonoBehaviour, IState
         if(idleCoroutine != null)
         {
             StopCoroutine(idleCoroutine);
-        } 
+        }
+        idleCoroutine = null;
     }
 
     private void Awake()
@@ -74,17 +73,33 @@ public class EnemyPatrollingState : MonoBehaviour, IState
         }
     }
 
-    private IEnumerator Test()
-    {
-        yield return null;
-    }
-
-    private IEnumerator Idle(Action onIdleCompletedEvent = null)
+    private IEnumerator IdleStepping(Action onIdleCompletedEvent = null)
     {
         navMeshAgent.speed = minPatrolMoveSpeed;
-        yield return new WaitForSeconds(UnityEngine.Random.Range(minIdleTime, maxIdleTime));
 
-        if(onIdleCompletedEvent != null)
+        int randomSteps = UnityEngine.Random.Range(minIdleStepCount, maxIdleStepCount);
+
+        for (int i = 0; i < randomSteps; i++)
+        {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(minTimeBetweenIdleSteps, maxTimeBetweenIdleSteps));
+
+            Vector3 randomDirection = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
+            float randomLength = UnityEngine.Random.Range(minIdleStepLength, maxIdleStepLength);
+            Vector3 destination = transform.position + (randomDirection * randomLength);
+
+            navMeshAgent.SetDestination(destination);
+
+            yield return null;
+
+            while (navMeshAgent.hasPath)
+            {
+                yield return null;
+            }
+        }
+
+        yield return new WaitForSeconds(UnityEngine.Random.Range(minTimeBetweenIdleSteps, maxTimeBetweenIdleSteps));
+
+        if (onIdleCompletedEvent != null)
         {
             onIdleCompletedEvent();
         }
