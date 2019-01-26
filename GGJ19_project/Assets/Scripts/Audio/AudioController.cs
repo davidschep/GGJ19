@@ -72,7 +72,7 @@ public class AudioController : MonoBehaviour
         switch (currentMusicState)
         {
             case MusicState.NORMAL:
-                float distanceToCat = 9f; // TODO: Vector3.Distance(cat, mouse);
+                float distanceToCat = Vector3.Distance(EnemyStateManager.Instance.transform.position, PlayerController.Instance.transform.position);
                 float vol = Mathf.Clamp(maxMusicVolume - (1f - minNearbyMusicDistanceCat / distanceToCat), 0, maxMusicVolume);
                 musicAudioSource.volume = vol;
                 break;
