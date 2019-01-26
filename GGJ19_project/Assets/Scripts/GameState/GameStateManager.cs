@@ -59,7 +59,7 @@ public class GameStateManager : MonoBehaviour
         for (int i = 0; i < maxFoodSpawns; i++)
         {
             // TODO: check if point hasn't been picked yet
-            // TODO: collision doesn't work yet.
+            // TODO: set actual correct points
             Transform pointTransform = points[(int)Random.Range(0, points.Count)].transform;
             GameObject food = Instantiate(foodPrefab, pointTransform.position, pointTransform.rotation);
             spawnedFoodPickups.Add(food);
