@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyChasingState : MonoBehaviour, IState
 {
     public StateType StateType { get { return StateType.EnemyChasingState; } }
+
+    [SerializeField] private float moveSpeed = 3.5f;
 
     private NavMeshAgent navMeshAgent;
 
@@ -14,7 +15,10 @@ public class EnemyChasingState : MonoBehaviour, IState
         navMeshAgent.SetDestination(PlayerTest.Instance.transform.position);
     }
 
-    public virtual void Enter() { }
+    public virtual void Enter()
+    {
+        navMeshAgent.speed = moveSpeed;
+    }
 
     public virtual void Exit() { }
 
