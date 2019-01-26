@@ -28,8 +28,14 @@ public class GameStateManager : MonoBehaviour
 
     public GameState gameState;
 
+    private void Start() 
+    {
+        PlayerController.Instance.playerDeathEvent.AddListener(GameOver);    
+    }
+
     public void GameOver()
     {
+        Debug.Log("GameOver!");
         gameState = GameState.GAME_OVER;
         SceneManager.LoadScene(GAMEOVER_SCENE_NAME);
     }

@@ -17,6 +17,7 @@ public class EnemyStateManager : MonoBehaviour
     {
         stateMachine = GetComponent<StateMachine>();
         stateMachine.SwitchState(StateType.EnemyPatrollingState);
+        PlayerController.Instance.playerDeathEvent.AddListener(KillPlayer);
     }
 
     private void Update()
@@ -58,5 +59,10 @@ public class EnemyStateManager : MonoBehaviour
         if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, playerBlockVisibilityLayerMask)) { return false; }
 
         return true;
+    }
+
+    private void KillPlayer()
+    {
+        Debug.Log("Player Killed!");
     }
 }

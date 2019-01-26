@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get { return GetInstance(); } }
@@ -20,9 +22,21 @@ public class PlayerController : MonoBehaviour
     }
 
     private NavMeshAgent agent;
+    private Rigidbody rb;
+
+    public UnityEvent playerDeathEvent;
+
     private void Awake() 
     {
-        agent = this.GetComponent<NavMeshAgent>();    
+        agent = this.GetComponent<NavMeshAgent>();
+        rb = this.GetComponent<Rigidbody>();
+
+        rb.isKinematic = true;
+        rb.useGravity = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+        if(playerDeathEvent == null)
+            playerDeathEvent = new UnityEvent();    
     }
 
     void Update()
@@ -58,5 +72,14 @@ public class PlayerController : MonoBehaviour
     void Rotate(float horizontal)
     {
         transform.Rotate(Vector3.up * (Input.GetAxis("Horizontal") * agent.angularSpeed) * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.tag == Tags.Enemy)
+        {
+            Debug.Log("Player -> Enemy Trigger Event");
+            playerDeathEvent.Invoke();
+        }    
     }
 }
