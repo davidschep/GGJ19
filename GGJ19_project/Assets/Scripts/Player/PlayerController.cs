@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     public UnityEvent playerDeathEvent;
 
+    public int foodAmount = 0;
+
     private void Awake() 
     {
         agent = this.GetComponent<NavMeshAgent>();
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
         rb.isKinematic = true;
         rb.useGravity = false;
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        // rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
         if(playerDeathEvent == null)
             playerDeathEvent = new UnityEvent();    

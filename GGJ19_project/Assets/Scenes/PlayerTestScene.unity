@@ -224,7 +224,7 @@ PrefabInstance:
     - target: {fileID: 2559425618483118420, guid: c94f6ba965ce885458206d238f9e552d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.82
+      value: 1.83
       objectReference: {fileID: 0}
     - target: {fileID: 2559425618483118420, guid: c94f6ba965ce885458206d238f9e552d,
         type: 3}
@@ -433,28 +433,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 19.432001, y: 0, z: 0}
---- !u!1 &642309599 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1786421687281992848, guid: cc77f5efe1127a6489eb6e73d48c96ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 1786421687328133450}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &642309601
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642309599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
-  m_AmplitudeGain: 1
-  m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &765558968
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,41 +775,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2004635552 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1786421686706019989, guid: cc77f5efe1127a6489eb6e73d48c96ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 1786421687328133450}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &2004635557
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2004635552}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
---- !u!135 &2004635558
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2004635552}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.15
-  m_Center: {x: 0, y: 0.125, z: 0}
 --- !u!1 &2034087109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,40 +963,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786421686937573017, guid: cc77f5efe1127a6489eb6e73d48c96ca,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.122183256
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786421686937573017, guid: cc77f5efe1127a6489eb6e73d48c96ca,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.000000009431595
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786421686937573017, guid: cc77f5efe1127a6489eb6e73d48c96ca,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.000000017455768
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786421688122705745, guid: cc77f5efe1127a6489eb6e73d48c96ca,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.122183256
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786421688122705745, guid: cc77f5efe1127a6489eb6e73d48c96ca,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.000000009431595
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786421688122705745, guid: cc77f5efe1127a6489eb6e73d48c96ca,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.000000017455768
-      objectReference: {fileID: 0}
-    - target: {fileID: 1814845079, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}
-      propertyPath: method
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}

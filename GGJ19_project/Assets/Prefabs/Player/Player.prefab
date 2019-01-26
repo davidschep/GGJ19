@@ -68,6 +68,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d037a1dedd8d344b09a9584464e695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8537834785180321798}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2601487445623079942}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  foodAmount: 0
 --- !u!1 &3414055621487065010
 GameObject:
   m_ObjectHideFlags: 0
