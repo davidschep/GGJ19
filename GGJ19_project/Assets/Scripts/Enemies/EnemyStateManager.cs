@@ -61,9 +61,9 @@ public class EnemyStateManager : MonoBehaviour
 
     private bool CheckSeePlayer()
     {
-        Vector3 directionToPlayer = (transform.position - PlayerController.Instance.transform.position).normalized;
+        Vector3 directionToPlayer = (PlayerController.Instance.transform.position - transform.position).normalized;
 
-        if ((Vector3.Dot(directionToPlayer, transform.forward.normalized) * -1) < angleToSeePlayer) { return false; }
+        if (Vector3.Dot(directionToPlayer, transform.forward.normalized) < angleToSeePlayer) { return false; }
 
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
 
@@ -71,7 +71,7 @@ public class EnemyStateManager : MonoBehaviour
 
         if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, playerBlockVisibilityLayerMask)) { return false; }
 
-        if(!navMeshAgent.CalculatePath(PlayerController.Instance.transform.position, navMeshPath)) { return false; }
+        if (!navMeshAgent.CalculatePath(PlayerController.Instance.transform.position, navMeshPath)) { return false; }
 
         return true;
     }
