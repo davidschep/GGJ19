@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToSeePlayer: 10000
-  angleToSeePlayer: 0
+  angleToSeePlayer: -0.562
   abandonChaseTime: 5
   playerBlockVisibilityLayerMask:
     serializedVersion: 2
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0235792599223a54fbddae5b38ced828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 35
+  moveSpeed: 25
 --- !u!1 &4158859511374718382
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,13 +34,19 @@ public class GameStateManager : MonoBehaviour
 
     private void Start() 
     {
-        PlayerController.Instance.playerDeathEvent.AddListener(GameOver);    
+        PlayerController.Instance.playerDeathEvent.AddListener(GameOver);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void GameOver()
     {
         Debug.Log("GameOver!");
         gameState = GameState.GAME_OVER;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         SceneManager.LoadScene(GAMEOVER_SCENE_NAME);
     }
 
