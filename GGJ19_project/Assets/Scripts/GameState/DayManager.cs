@@ -15,12 +15,9 @@ public class DayManager : MonoBehaviour
         return instance;
     }
 
-    [SerializeField]
-    private float dayDuration = 120f; // in seconds
-    [SerializeField]
-    private float fadeDuration = 0.5f; // in seconds
-    [SerializeField]
-    private float extraBlackTime = 0.4f; // in seconds
+    [SerializeField] private float dayDuration = 120f; // in seconds
+    [SerializeField]  private float fadeDuration = 0.5f; // in seconds
+    [SerializeField] private float extraBlackTime = 0.4f; // in seconds
 
     private float endDayTimer = 0f;
     private float dayTimer = 0f; // in seconds

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MouseHome : MonoBehaviour
 {
-    [SerializeField]
-    private int foodNeeded = 3;
+    [SerializeField] private int foodNeeded = 3;
 
     private int foodCount = 0;
     public void AddFood(int amount)
