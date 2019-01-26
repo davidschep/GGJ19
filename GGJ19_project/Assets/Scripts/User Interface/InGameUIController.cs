@@ -17,24 +17,10 @@ public class InGameUIController : MonoBehaviour
         return instance;
     }
 
-    [SerializeField]
-    private Image fadeInOutImage;
+    [SerializeField] private Image fadeInOutImage;
 
-    [SerializeField]
-    private TMPro.TMP_Text foodLeftToCollectText;
-    [SerializeField]
-    private TMPro.TMP_Text timeText;
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [SerializeField] private TMPro.TMP_Text foodLeftToCollectText;
+    [SerializeField]  private TMPro.TMP_Text timeText;
 
     public void SetFadeInOutImageAlpha(float alpha)
     {
