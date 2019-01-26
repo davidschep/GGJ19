@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(StateMachine))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyStateManager : MonoBehaviour
 {
+    private const float CHECK_PLAYER_VISIBILITY_INTERVAL = 0.5f;
 
     [SerializeField] private float distanceToSeePlayer = 8;
     [SerializeField] [Range(-1.0f , 1.0f)] private float angleToSeePlayer = 0.7f;
@@ -10,18 +13,29 @@ public class EnemyStateManager : MonoBehaviour
     [SerializeField] private LayerMask playerBlockVisibilityLayerMask;
 
     private StateMachine stateMachine;
+    private NavMeshAgent navMeshAgent;
     private bool chasing;
     private float abandonChaseTimer;
+    private float checkPlayerVisibilityTimer;
+    private bool seePlayer;
+    private NavMeshPath navMeshPath;
 
     private void Start()
     {
         stateMachine = GetComponent<StateMachine>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshPath = new NavMeshPath();
         stateMachine.SwitchState(StateType.EnemyPatrollingState);
     }
 
     private void Update()
     {
-        bool seePlayer = CheckSeePlayer();
+        checkPlayerVisibilityTimer -= Time.deltaTime;
+        if(checkPlayerVisibilityTimer <= 0)
+        {
+            seePlayer = CheckSeePlayer();
+            checkPlayerVisibilityTimer = CHECK_PLAYER_VISIBILITY_INTERVAL;
+        }
 
         if (seePlayer)
         {
@@ -56,6 +70,8 @@ public class EnemyStateManager : MonoBehaviour
         if (distanceToPlayer > distanceToSeePlayer) { return false; }
 
         if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, playerBlockVisibilityLayerMask)) { return false; }
+
+        if(!navMeshAgent.CalculatePath(PlayerController.Instance.transform.position, navMeshPath)) { return false; }
 
         return true;
     }
