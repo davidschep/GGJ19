@@ -17,23 +17,25 @@ public class InGameUIController : MonoBehaviour
         return instance;
     }
 
-    [SerializeField]
-    private Image fadeInOutImage;
+    [SerializeField] private Image fadeInOutImage;
 
-    [SerializeField]
-    private TMPro.TMP_Text foodLeftToCollectText;
-    [SerializeField]
-    private TMPro.TMP_Text timeText;
+    [SerializeField] private TMPro.TMP_Text foodLeftToCollectText;
+    [SerializeField]  private TMPro.TMP_Text timeText;
 
-    void Start()
+    private void Start()
     {
-
+        AudioController.Instance.SwitchMusicState(MusicState.CATNEARBY);
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AudioController.Instance.PlayOneShot(SoundEffectType.PICKUP);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            AudioController.Instance.SwitchMusicState(MusicState.CATCHASE);
+        }
     }
 
     public void SetFadeInOutImageAlpha(float alpha)
