@@ -12,7 +12,7 @@ public enum SoundEffectType
 public enum MusicState
 {
     NONE = 0,
-    CATNEARBY,
+    NORMAL,
     CATCHASE
 }
 
@@ -52,10 +52,12 @@ public class AudioController : MonoBehaviour
 
     private bool fadeinMusic = true;
 
-    private MusicState currentMusicState = MusicState.CATNEARBY;
+    private MusicState currentMusicState = MusicState.NORMAL;
 
     private void Start()
     {
+        AudioController.Instance.SwitchMusicState(MusicState.NORMAL);
+        
         // the idea is that the background music is playing unless catchase is
         if (playBackgroundMusic)
         {
@@ -69,7 +71,7 @@ public class AudioController : MonoBehaviour
     {
         switch (currentMusicState)
         {
-            case MusicState.CATNEARBY:
+            case MusicState.NORMAL:
                 float distanceToCat = 9f; // TODO: Vector3.Distance(cat, mouse);
                 float vol = Mathf.Clamp(maxMusicVolume - (1f - minNearbyMusicDistanceCat / distanceToCat), 0, maxMusicVolume);
                 musicAudioSource.volume = vol;
@@ -105,7 +107,7 @@ public class AudioController : MonoBehaviour
             case MusicState.NONE:
                 musicAudioSource.Stop();
                 break;
-            case MusicState.CATNEARBY:
+            case MusicState.NORMAL:
                 musicAudioSource.clip = catNearbyMusic;
                 musicAudioSource.time = backgroundMusicAudioSource.time;
                 musicAudioSource.Play();

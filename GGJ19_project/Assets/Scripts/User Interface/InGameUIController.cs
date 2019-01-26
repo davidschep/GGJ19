@@ -22,22 +22,6 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text foodLeftToCollectText;
     [SerializeField]  private TMPro.TMP_Text timeText;
 
-    private void Start()
-    {
-        AudioController.Instance.SwitchMusicState(MusicState.CATNEARBY);
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            AudioController.Instance.PlayOneShot(SoundEffectType.PICKUP);
-        }
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            AudioController.Instance.SwitchMusicState(MusicState.CATCHASE);
-        }
-    }
-
     public void SetFadeInOutImageAlpha(float alpha)
     {
         fadeInOutImage.color = new Color(fadeInOutImage.color.r, fadeInOutImage.color.g, fadeInOutImage.color.b, alpha);
