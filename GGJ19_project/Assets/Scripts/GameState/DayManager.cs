@@ -73,6 +73,13 @@ public class DayManager : MonoBehaviour
 
         // TODO: set mouse position in base
         // TODO: set random cat position
+        EnemyStateManager cat = EnemyStateManager.Instance;
+        if(cat != null)
+        {
+            List<Point> points = PointManager.Instance.GetPoints(PointType.EnemySpawnPoint);
+            int posIndex = Random.Range(0, points.Count);
+            cat.transform.position = points[posIndex].transform.position;
+        }
     }
 
     public void DayCompleted()
