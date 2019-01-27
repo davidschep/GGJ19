@@ -7,8 +7,7 @@ public enum SoundEffectType
     PICKUP = 0,
     SPOTTED,
     HOMEFANFARE,
-    BOOST,
-    GAMEOVER
+    BOOST
 }
 
 public enum MusicState
@@ -46,7 +45,6 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioClip pickupClip;
     [SerializeField] private AudioClip spottedClip;
     [SerializeField] private AudioClip[] homeFanfareClips;
-    [SerializeField] private AudioClip gameoverClip;
     [SerializeField] private AudioClip boostClip;
 
     [Header("Technical")]
@@ -144,9 +142,6 @@ public class AudioController : MonoBehaviour
                 break;
             case SoundEffectType.BOOST:
                 effectAudioSource.PlayOneShot(boostClip);
-                break;
-            case SoundEffectType.GAMEOVER:
-                effectAudioSource.PlayOneShot(gameoverClip);
                 break;
             default:
                 Debug.LogError("Sound effect state missing");

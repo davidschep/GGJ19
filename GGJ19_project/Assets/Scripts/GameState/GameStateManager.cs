@@ -42,7 +42,6 @@ public class GameStateManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("GameOver!");
-        AudioController.Instance.PlayOneShot(SoundEffectType.GAMEOVER);
         gameState = GameState.GAME_OVER;
 
         Cursor.visible = true;
