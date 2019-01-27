@@ -8,10 +8,9 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    // singleton
     public static PlayerController Instance { get { return GetInstance(); } }
-
     private static PlayerController instance;
-
     private static PlayerController GetInstance()
     {
         if (instance == null)
@@ -22,7 +21,6 @@ public class PlayerController : MonoBehaviour
     }
 
     public Transform CameraTransform { get { return cameraTransform; } }
-
     private NavMeshAgent agent;
     private Rigidbody rb;
 
@@ -33,24 +31,56 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float boostSpeed = 25;
     [SerializeField] private Transform cameraTransform;
 
-    public UnityEvent playerDeathEvent;
+    private float baseAcceleration;
 
-    [HideInInspector] public int foodAmount = 0;
+    const float slowDownPerFood = 2f;
+    private float GetNormalSpeed() { return normalSpeed - slowDownPerFood * (float)foodAmount; }
+    private float GetBoostSpeed() { return boostSpeed - slowDownPerFood * (float)foodAmount; }
+
+    public UnityEvent playerDeathEvent;
 
     private Coroutine boostCoroutine;
     private float boostCooldownTimer;
 
-    private void Awake() 
+    // food
+    [SerializeField] private Transform backpackTransform;
+    private int foodAmount = 0;
+    public int GetFoodAmount() { return foodAmount; }
+    public void SetFoodAmount(int food)
+    {
+        foodAmount = food;
+        if (foodAmount > 2)
+        {
+            backpackTransform.localScale = new Vector3(3.2f, 3.2f, 3.2f);
+        }
+        else if (foodAmount > 1)
+        {
+            backpackTransform.localScale = new Vector3(2.6f, 2.6f, 2.6f);
+        }
+        else if (foodAmount > 0)
+        {
+            backpackTransform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
+        }
+        else
+        {
+            backpackTransform.localScale = Vector3.one;
+        }
+        agent.speed = GetNormalSpeed();
+        agent.acceleration = baseAcceleration;
+    }
+
+    private void Awake()
     {
         agent = this.GetComponent<NavMeshAgent>();
         rb = this.GetComponent<Rigidbody>();
 
         rb.isKinematic = true;
         rb.useGravity = false;
-        agent.speed = normalSpeed;
+        agent.speed = GetNormalSpeed();
+        baseAcceleration = agent.acceleration;
 
         if (playerDeathEvent == null)
-            playerDeathEvent = new UnityEvent();    
+            playerDeathEvent = new UnityEvent();
     }
 
     void Update()
@@ -59,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
         InGameUIController.Instance.SetPlayerBoostCDValue(Mathf.Abs(Mathf.Clamp01(boostCooldownTimer / boostCooldown) - 1));
 
-        if(boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Fire1") > 0.8f || Input.GetAxis("Fire2") > 0.8f)))
+        if (boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Fire1") > 0.8f || Input.GetAxis("Fire2") > 0.8f)))
         {
             boostCooldownTimer = boostCooldown;
             boostCoroutine = StartCoroutine(Boost());
@@ -77,9 +107,9 @@ public class PlayerController : MonoBehaviour
     {
         float previousAcceleration = agent.acceleration;
         agent.acceleration = 100000;
-        agent.speed = boostSpeed;
+        agent.speed = GetBoostSpeed();
         yield return new WaitForSeconds(boostTime);
-        agent.speed = normalSpeed;
+        agent.speed = GetNormalSpeed();
         agent.acceleration = previousAcceleration;
         boostCoroutine = null;
     }
@@ -107,7 +137,7 @@ public class PlayerController : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + direction, Color.green, 0, false);
 
 
-            if(useVelocity)
+            if (useVelocity)
             {
                 //Moving with velocity doesn't look at the direction, do it manually.
                 LookAtY(transform.position + direction);
@@ -128,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
         if (input.magnitude > 1)
         {
-            input = input.normalized;  
+            input = input.normalized;
         }
 
         Vector3 dir = this.transform.forward * vertical;
@@ -146,12 +176,12 @@ public class PlayerController : MonoBehaviour
         transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == Tags.Enemy)
+        if (other.tag == Tags.Enemy)
         {
             Debug.Log("Player -> Enemy Trigger Event");
             playerDeathEvent.Invoke();
-        }    
+        }
     }
 }

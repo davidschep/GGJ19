@@ -33,8 +33,8 @@ public class MouseHome : MonoBehaviour
     {
         if(other.tag == Tags.Player)
         {
-            AddFood(PlayerController.Instance.foodAmount);
-            PlayerController.Instance.foodAmount = 0;
+            AddFood(PlayerController.Instance.GetFoodAmount());
+            PlayerController.Instance.SetFoodAmount(0);
         }
     }
 }

@@ -53,7 +53,7 @@ public class Pickup : MonoBehaviour
     {
         if (other.tag == Tags.Player)
         {
-            PlayerController.Instance.foodAmount++;
+            PlayerController.Instance.SetFoodAmount(PlayerController.Instance.GetFoodAmount() + 1);
             gameObject.SetActive(false);
         }
     }
