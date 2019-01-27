@@ -609,5 +609,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2471426759574211369, guid: 7ef71b12ff8791c47b853437d069e732,
+        type: 3}
+      propertyPath: m_AgentTypeID
+      value: 1479372276
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471426759574211369, guid: 7ef71b12ff8791c47b853437d069e732,
+        type: 3}
+      propertyPath: m_VoxelSize
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471426759574211369, guid: 7ef71b12ff8791c47b853437d069e732,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: a0ee2c9619884b940b7d3cc167e16022,
+        type: 2}
+    - target: {fileID: 8216748351164686900, guid: 7ef71b12ff8791c47b853437d069e732,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.032
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ef71b12ff8791c47b853437d069e732, type: 3}
