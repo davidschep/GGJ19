@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DayManager : MonoBehaviour
 {
@@ -28,7 +29,9 @@ public class DayManager : MonoBehaviour
     {
         Debug.Assert(dayDuration > 0f);
         Debug.Assert(fadeDuration > 0f);
+
         StartDay();
+        EnemyStateManager.Instance.GetComponent<NavMeshAgent>().enabled = true;
     }
 
     void Update()

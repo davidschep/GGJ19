@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 31e20218b8541524e8c3322e211dd3ab
+  m_OcclusionCullingData: {fileID: 36300000, guid: 2f906cb71b3261246af1b197957a06e1,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -182,12 +183,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36fbcee920cd5c4ba7f7956ea852f43, type: 3}
---- !u!4 &165710453 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3270339803201282095, guid: d36fbcee920cd5c4ba7f7956ea852f43,
-    type: 3}
-  m_PrefabInstance: {fileID: 165710452}
-  m_PrefabAsset: {fileID: 0}
 --- !u!108 &165710454 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 3270339803201282094, guid: d36fbcee920cd5c4ba7f7956ea852f43,
@@ -380,7 +375,7 @@ PrefabInstance:
     - target: {fileID: 1263618393898160539, guid: 4ddd113e40960de4fbf53ad0bee76ac0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1319136298, guid: 4ddd113e40960de4fbf53ad0bee76ac0, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -397,7 +392,7 @@ PrefabInstance:
     - target: {fileID: 1263618393435220791, guid: 4ddd113e40960de4fbf53ad0bee76ac0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.15000916
+      value: -0.15002441
       objectReference: {fileID: 0}
     - target: {fileID: 3065697004985594587, guid: 4ddd113e40960de4fbf53ad0bee76ac0,
         type: 3}
@@ -582,22 +577,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1909643684, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}
-      propertyPath: sunTransform
-      value: 
-      objectReference: {fileID: 165710453}
-    - target: {fileID: 1909643684, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}
-      propertyPath: sunThreshold.r
-      value: 0.9339623
-      objectReference: {fileID: 0}
-    - target: {fileID: 1909643684, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}
-      propertyPath: sunThreshold.g
-      value: 0.6199094
-      objectReference: {fileID: 0}
-    - target: {fileID: 1909643684, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}
-      propertyPath: sunThreshold.b
-      value: 0.4008989
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}
 --- !u!1001 &1969505781
@@ -734,6 +713,22 @@ PrefabInstance:
     - target: {fileID: 2471426759574211370, guid: 7ef71b12ff8791c47b853437d069e732,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471426759574211369, guid: 7ef71b12ff8791c47b853437d069e732,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: f458606dbf574734ab763cb53fcf5145,
+        type: 2}
+    - target: {fileID: 8802094867441303391, guid: 7ef71b12ff8791c47b853437d069e732,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 56992669168490631, guid: 7ef71b12ff8791c47b853437d069e732,
+        type: 3}
+      propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
