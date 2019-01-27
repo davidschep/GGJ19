@@ -6,7 +6,7 @@ public class EnemyChasingState : MonoBehaviour, IState
 {
     public StateType StateType { get { return StateType.EnemyChasingState; } }
 
-    [SerializeField] private float moveSpeed = 3.5f;
+    public float moveSpeed = 3.5f;
 
     private NavMeshAgent navMeshAgent;
 

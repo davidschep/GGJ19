@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float normalSpeed = 15;
     [SerializeField] private float boostSpeed = 25;
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private Transform ro;
+    [SerializeField] private LayerMask layerMask;
 
     private float baseAcceleration;
 
@@ -152,7 +154,14 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                agent.SetDestination(this.transform.position + direction + Vector3.up);
+                if(Physics.Raycast(ro.position, this.transform.forward, 1.0f, layerMask))
+                {
+                    agent.SetDestination(this.transform.position + direction + Vector3.up);
+                }
+                else
+                {
+                    agent.SetDestination(this.transform.position + direction);
+                }
             }
         }
     }
