@@ -25,7 +25,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject foodPrefab;
-    public const int MAX_FOOD_SPAWNS = 5;
+    public const int MAX_FOOD_SPAWNS = 7;
     List<GameObject> spawnedFoodPickups = new List<GameObject>();
 
     const string GAMEOVER_SCENE_NAME = "gameover_menu";
