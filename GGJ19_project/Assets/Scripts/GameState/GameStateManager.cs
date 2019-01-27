@@ -25,7 +25,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject foodPrefab;
-    const int maxFoodSpawns = 3;
+    public const int MAX_FOOD_SPAWNS = 3;
     List<GameObject> spawnedFoodPickups = new List<GameObject>();
 
     const string GAMEOVER_SCENE_NAME = "gameover_menu";
@@ -55,12 +55,21 @@ public class GameStateManager : MonoBehaviour
         RemoveOldFood();
 
         List<Point> points = PointManager.Instance.GetPoints(PointType.Pickup);
-        Debug.Assert(points.Count > 0);
-        for (int i = 0; i < maxFoodSpawns; i++)
+        Debug.Assert(points.Count > MAX_FOOD_SPAWNS);
+        List<int> pickedPosition = new List<int>();
+        for (int i = 0; i < MAX_FOOD_SPAWNS; i++)
         {
-            // TODO: check if point hasn't been picked yet
             // TODO: set actual correct points
-            Transform pointTransform = points[(int)Random.Range(0, points.Count)].transform;
+            int pos = (int)Random.Range(0, points.Count);
+            int attempts = 0;
+            while(pickedPosition.Contains(pos) && attempts < 50)
+            {
+                pos = (int)Random.Range(0, points.Count);
+                attempts++;
+            }
+
+            pickedPosition.Add(pos);
+            Transform pointTransform = points[pos].transform;
             GameObject food = Instantiate(foodPrefab, pointTransform.position, pointTransform.rotation);
             spawnedFoodPickups.Add(food);
         }

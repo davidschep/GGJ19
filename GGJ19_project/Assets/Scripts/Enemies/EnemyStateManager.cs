@@ -18,6 +18,7 @@ public class EnemyStateManager : MonoBehaviour
 
     private const float CHECK_PLAYER_VISIBILITY_INTERVAL = 0.5f;
 
+    [SerializeField] private float autoChaseDistance = 5;
     [SerializeField] private float distanceToSeePlayer = 8;
     [SerializeField] [Range(-1.0f , 1.0f)] private float angleToSeePlayer = 0.7f;
     [SerializeField] private float abandonChaseTime = 5;
@@ -74,16 +75,13 @@ public class EnemyStateManager : MonoBehaviour
     private bool CheckSeePlayer()
     {
         Vector3 directionToPlayer = (PlayerController.Instance.transform.position - transform.position).normalized;
-
-        if (Vector3.Dot(directionToPlayer, transform.forward.normalized) < angleToSeePlayer) { return false; }
-
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
 
-        if (distanceToPlayer > distanceToSeePlayer) { return false; }
-
         if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, playerBlockVisibilityLayerMask)) { return false; }
-
         if (!navMeshAgent.CalculatePath(PlayerController.Instance.transform.position, navMeshPath)) { return false; }
+        if (distanceToPlayer <= autoChaseDistance) { return true; }
+        if (distanceToPlayer > distanceToSeePlayer) { return false; }
+        if (Vector3.Dot(directionToPlayer, transform.forward.normalized) < angleToSeePlayer) { return false; }
 
         return true;
     }

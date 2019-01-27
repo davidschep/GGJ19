@@ -19,8 +19,8 @@ public class InGameUIController : MonoBehaviour
 
     [SerializeField] private Image fadeInOutImage;
 
-    [SerializeField] private TMPro.TMP_Text foodLeftToCollectText;
-    [SerializeField]  private TMPro.TMP_Text timeText;
+    [SerializeField] private TMPro.TMP_Text timeText;
+    [SerializeField] private Slider playerBoostCdSlider;
 
     public void SetFadeInOutImageAlpha(float alpha)
     {
@@ -32,8 +32,13 @@ public class InGameUIController : MonoBehaviour
         timeText.text = "day: " + day.ToString() + "\n" + "time left: " + time.ToString();
     }
 
-    public void SetFoodLeftToCollectText(int amountLeft)
+    public void SetFoodCounter(int amountLeft)
     {
-        foodLeftToCollectText.text = amountLeft.ToString() + " food left to collect";
+        CribUI.Instance.UpdateFoodCounter(amountLeft);
+    }
+
+    public void SetPlayerBoostCDValue(float value)
+    {
+        playerBoostCdSlider.value = value;
     }
 }
