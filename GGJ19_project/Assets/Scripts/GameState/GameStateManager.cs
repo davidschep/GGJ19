@@ -68,6 +68,7 @@ public class GameStateManager : MonoBehaviour
                 attempts++;
             }
 
+            pickedPosition.Add(pos);
             Transform pointTransform = points[pos].transform;
             GameObject food = Instantiate(foodPrefab, pointTransform.position, pointTransform.rotation);
             spawnedFoodPickups.Add(food);
