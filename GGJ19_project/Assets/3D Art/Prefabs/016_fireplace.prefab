@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7806356526207665046}
   - component: {fileID: 4214381808743320884}
+  - component: {fileID: 284241531522491496}
   m_Layer: 0
   m_Name: 016_fireplace
   m_TagString: Untagged
@@ -50,6 +51,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.23672235, z: 1}
   m_Center: {x: 0, y: 0.059942663, z: 0}
+--- !u!208 &284241531522491496
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726431643583619078}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.4, y: 0.1, z: 0.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.05, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2257765939661400238
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +155,7 @@ GameObject:
   - component: {fileID: 7892215289065737338}
   - component: {fileID: 9167644247626296909}
   - component: {fileID: 3245307810673993669}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
