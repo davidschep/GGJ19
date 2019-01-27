@@ -4,6 +4,6 @@ public class LookAtCamera : MonoBehaviour
 {
     void Update()
     {
-        transform.LookAt(PlayerController.Instance.CameraTransform.position);
+        transform.LookAt(PlayerController.Instance.PlayerCamera.transform.position);
     }
 }
