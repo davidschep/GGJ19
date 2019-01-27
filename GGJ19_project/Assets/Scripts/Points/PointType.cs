@@ -2,4 +2,5 @@
 {
     Pickup,
     EnemyWayPoint,
+    EnemySpawnPoint
 }
