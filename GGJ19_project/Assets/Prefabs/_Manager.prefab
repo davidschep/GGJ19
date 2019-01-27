@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1304a2667d8f0904ca2ba9afbdf8cd1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayDuration: 120
+  dayDuration: 180
   fadeDuration: 0.5
   extraBlackTime: 0.4
 --- !u!114 &6625780139846429263
