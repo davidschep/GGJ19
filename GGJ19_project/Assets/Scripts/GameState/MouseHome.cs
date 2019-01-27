@@ -40,6 +40,7 @@ public class MouseHome : MonoBehaviour
             PlayerController.Instance.transform.position = outsideSpawnPoint.position;
             PlayerController.Instance.SetCameraActivate(true);
             mouseHomeCamera.gameObject.SetActive(false);
+            PlayerController.Instance.UpdatePlayerBeingInHouse(false);
         }
         else
         {
@@ -48,6 +49,7 @@ public class MouseHome : MonoBehaviour
             PlayerController.Instance.transform.position = insideSpawnPoint.position;
             AddFood(PlayerController.Instance.GetFoodAmount());
             PlayerController.Instance.SetFoodAmount(0);
+            PlayerController.Instance.UpdatePlayerBeingInHouse(true);
         }
 
         playerInside = !playerInside;
