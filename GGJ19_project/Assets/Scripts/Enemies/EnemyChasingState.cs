@@ -18,9 +18,13 @@ public class EnemyChasingState : MonoBehaviour, IState
     public virtual void Enter()
     {
         navMeshAgent.speed = moveSpeed;
+        AudioController.Instance.SwitchMusicState(MusicState.CATCHASE);
     }
 
-    public virtual void Exit() { }
+    public virtual void Exit()
+    {
+        AudioController.Instance.SwitchMusicState(MusicState.NORMAL);
+    }
 
     private void Awake()
     {
