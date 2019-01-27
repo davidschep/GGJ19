@@ -86,7 +86,7 @@ MonoBehaviour:
   autoChaseDistance: 3.5
   distanceToSeePlayer: 10000
   angleToSeePlayer: -0.562
-  abandonChaseTime: 5
+  abandonChaseTime: 2.5
   playerBlockVisibilityLayerMask:
     serializedVersion: 2
     m_Bits: 311
@@ -102,14 +102,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bf7c6c913f5494097a4d05dc1c9d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPatrolMoveSpeed: 2.5
-  maxPatrolMoveSpeed: 5
-  minTimeBetweenIdleSteps: 1.5
-  maxTimeBetweenIdleSteps: 2.5
-  minIdleStepCount: 2
-  maxIdleStepCount: 4
-  minIdleStepLength: 0.5
-  maxIdleStepLength: 2
+  minPatrolMoveSpeed: 4.5
+  maxPatrolMoveSpeed: 8
+  minTimeBetweenIdleSteps: 0.5
+  maxTimeBetweenIdleSteps: 2
+  minIdleStepCount: 1
+  maxIdleStepCount: 2
+  minIdleStepLength: 1
+  maxIdleStepLength: 3
   randomSpeed: 1
 --- !u!114 &595799572
 MonoBehaviour:
