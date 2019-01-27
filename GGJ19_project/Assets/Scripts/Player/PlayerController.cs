@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -27,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool useVelocity = false;
     [SerializeField] private float boostTime = 0.75f;
     [SerializeField] private float boostCooldown = 5;
+    [SerializeField] private float houseSpeed = 3;
     [SerializeField] private float normalSpeed = 15;
     [SerializeField] private float boostSpeed = 25;
     [SerializeField] private Camera playerCamera;
@@ -41,6 +41,20 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine boostCoroutine;
     private float boostCooldownTimer;
+    private bool isInHouse;
+
+    public void UpdatePlayerBeingInHouse(bool isInHouse)
+    {
+        this.isInHouse = isInHouse;
+        if(isInHouse)
+        {
+            agent.speed = houseSpeed;
+        }
+        else
+        {
+            agent.speed = GetNormalSpeed();
+        }
+    }
 
     // food
     [SerializeField] private Transform backpackTransform;
@@ -94,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
         InGameUIController.Instance.SetPlayerBoostCDValue(Mathf.Abs(Mathf.Clamp01(boostCooldownTimer / boostCooldown) - 1));
 
-        if (boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Boost1") > 0.8f || Input.GetAxis("Boost2") > 0.8f)))
+        if (isInHouse && boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Boost1") > 0.8f || Input.GetAxis("Boost2") > 0.8f)))
         {
             boostCooldownTimer = boostCooldown;
             boostCoroutine = StartCoroutine(Boost());
