@@ -15,6 +15,7 @@ public class MouseHome : MonoBehaviour
 
     public void AddFood(int amount)
     {
+        AudioController.Instance.PlayOneShot(SoundEffectType.HOMEFANFARE);
         foodCount += amount;
         if(foodCount >= foodNeeded)
         {
