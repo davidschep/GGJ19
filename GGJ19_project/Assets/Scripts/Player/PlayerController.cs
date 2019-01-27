@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
         InGameUIController.Instance.SetPlayerBoostCDValue(Mathf.Abs(Mathf.Clamp01(boostCooldownTimer / boostCooldown) - 1));
 
-        if (boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Fire1") > 0.8f || Input.GetAxis("Fire2") > 0.8f)))
+        if (boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Boost1") > 0.8f || Input.GetAxis("Boost2") > 0.8f)))
         {
             boostCooldownTimer = boostCooldown;
             boostCoroutine = StartCoroutine(Boost());
