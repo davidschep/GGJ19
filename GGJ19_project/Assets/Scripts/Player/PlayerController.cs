@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public Camera PlayerCamera { get { return playerCamera; } }
+    public float HouseSpeed { get { return houseSpeed; } }
+    public float NormalSpeed { get { return normalSpeed; } }
+    public float BoostSpeed { get { return boostSpeed; } }
     private NavMeshAgent agent;
     private Rigidbody rb;
 
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Transform ro;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Animator animator;
 
     private float baseAcceleration;
 
@@ -92,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        animator.SetTrigger("Idle");
+
         agent = this.GetComponent<NavMeshAgent>();
         rb = this.GetComponent<Rigidbody>();
 
@@ -138,6 +144,22 @@ public class PlayerController : MonoBehaviour
 
     void PointMove(float horizontal, float vertical)
     {
+        if ((horizontal != 0 || vertical != 0))
+        {
+            if (boostCoroutine == null)
+            {
+                animator.SetTrigger("Walk");
+            }
+            else
+            {
+                animator.SetTrigger("Run");
+            }
+        }
+        else
+        {
+            animator.SetTrigger("Idle");
+        }
+
         if (playerCamera.enabled && ((horizontal != 0 || vertical != 0) || !useVelocity))
         {
             //Create input vector, normalize in case of diagonal movement.
