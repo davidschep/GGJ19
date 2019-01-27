@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         return instance;
     }
 
-    public Transform CameraTransform { get { return cameraTransform; } }
+    public Camera PlayerCamera { get { return playerCamera; } }
     private NavMeshAgent agent;
     private Rigidbody rb;
 
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float boostCooldown = 5;
     [SerializeField] private float normalSpeed = 15;
     [SerializeField] private float boostSpeed = 25;
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Camera playerCamera;
 
     private float baseAcceleration;
 
@@ -67,6 +67,11 @@ public class PlayerController : MonoBehaviour
         }
         agent.speed = GetNormalSpeed();
         agent.acceleration = baseAcceleration;
+    }
+
+    public void SetCameraActivate(bool enable)
+    {
+        playerCamera.gameObject.SetActive(enable);
     }
 
     private void Awake()
@@ -116,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     void PointMove(float horizontal, float vertical)
     {
-        if ((horizontal != 0 || vertical != 0) || !useVelocity)
+        if (playerCamera.enabled && ((horizontal != 0 || vertical != 0) || !useVelocity))
         {
             //Create input vector, normalize in case of diagonal movement.
             Vector3 input = new Vector3(horizontal, 0, vertical);
@@ -126,7 +131,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Get camera rotation without up/down angle, only left/right.
-            Vector3 angles = Camera.main.transform.rotation.eulerAngles;
+            Vector3 angles = playerCamera.transform.rotation.eulerAngles;
             angles.x = 0;
             Quaternion rotation = Quaternion.Euler(angles);
 
