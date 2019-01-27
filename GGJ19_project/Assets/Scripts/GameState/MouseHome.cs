@@ -16,7 +16,7 @@ public class MouseHome : MonoBehaviour
             DayManager.Instance.DayCompleted();
         }
 
-        InGameUIController.Instance.SetFoodLeftToCollectText(foodNeeded - foodCount);
+        InGameUIController.Instance.SetFoodLeftToCollectText(foodCount);
     }
     public int GetFood() { return foodCount;}
     public void ResetFood()
@@ -25,14 +25,6 @@ public class MouseHome : MonoBehaviour
         foodCount = 0;
 
         InGameUIController.Instance.SetFoodLeftToCollectText(foodNeeded);
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            AddFood(1);
-        }
     }
 
     private void OnTriggerEnter(Collider other)

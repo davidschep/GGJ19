@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
         return instance;
     }
 
+    public Transform CameraTransform { get { return cameraTransform; } }
+
     private NavMeshAgent agent;
     private Rigidbody rb;
 
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float boostCooldown = 5;
     [SerializeField] private float normalSpeed = 15;
     [SerializeField] private float boostSpeed = 25;
+    [SerializeField] private Transform cameraTransform;
 
     public UnityEvent playerDeathEvent;
 
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         boostCooldownTimer -= Time.deltaTime;
 
-        BoostCDBar.Instance.SetValue(Mathf.Abs(Mathf.Clamp01(boostCooldownTimer / boostCooldown) - 1));
+        InGameUIController.Instance.SetPlayerBoostCDValue(Mathf.Abs(Mathf.Clamp01(boostCooldownTimer / boostCooldown) - 1));
 
         if(boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Fire1") > 0.8f || Input.GetAxis("Fire2") > 0.8f)))
         {
