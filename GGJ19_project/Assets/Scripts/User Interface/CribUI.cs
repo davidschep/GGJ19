@@ -16,9 +16,10 @@ public class CribUI : MonoBehaviour
     }
 
     [SerializeField] private TextMesh foodCounterText;
+    [SerializeField] private MouseHome mouseHome;
 
     public void UpdateFoodCounter(int foodCounter)
     {
-        foodCounterText.text = "Food: " + foodCounter + "/" + GameStateManager.MAX_FOOD_SPAWNS;
+        foodCounterText.text = "Food: " + foodCounter + "/" + mouseHome.FoodNeeded;
     }
 }

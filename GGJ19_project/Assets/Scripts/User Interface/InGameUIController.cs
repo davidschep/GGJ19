@@ -32,10 +32,9 @@ public class InGameUIController : MonoBehaviour
         timeText.text = "day: " + day.ToString() + "\n" + "time left: " + time.ToString();
     }
 
-    public void SetFoodLeftToCollectText(int amountLeft)
+    public void SetFoodCounter(int amountLeft)
     {
         CribUI.Instance.UpdateFoodCounter(amountLeft);
-
     }
 
     public void SetPlayerBoostCDValue(float value)

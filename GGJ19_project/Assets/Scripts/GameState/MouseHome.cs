@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MouseHome : MonoBehaviour
 {
+    public int FoodNeeded { get { return foodNeeded; } }
+
     [SerializeField] private int foodNeeded = 3;
 
     private int foodCount = 0;
@@ -16,7 +18,7 @@ public class MouseHome : MonoBehaviour
             DayManager.Instance.DayCompleted();
         }
 
-        InGameUIController.Instance.SetFoodLeftToCollectText(foodCount);
+        InGameUIController.Instance.SetFoodCounter(foodCount);
     }
     public int GetFood() { return foodCount;}
     public void ResetFood()
@@ -24,7 +26,7 @@ public class MouseHome : MonoBehaviour
         // TODO: visualize amount of food in base?
         foodCount = 0;
 
-        InGameUIController.Instance.SetFoodLeftToCollectText(foodNeeded);
+        InGameUIController.Instance.SetFoodCounter(foodCount);
     }
 
     private void OnTriggerEnter(Collider other)
