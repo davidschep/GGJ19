@@ -577,6 +577,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1909643683, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}
+      propertyPath: profile
+      value: 
+      objectReference: {fileID: 11400000, guid: 1a9e3c67584da814fa06cdd36c42f092,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc77f5efe1127a6489eb6e73d48c96ca, type: 3}
 --- !u!1001 &1969505781
@@ -713,22 +718,6 @@ PrefabInstance:
     - target: {fileID: 2471426759574211370, guid: 7ef71b12ff8791c47b853437d069e732,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2471426759574211369, guid: 7ef71b12ff8791c47b853437d069e732,
-        type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: f458606dbf574734ab763cb53fcf5145,
-        type: 2}
-    - target: {fileID: 8802094867441303391, guid: 7ef71b12ff8791c47b853437d069e732,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 56992669168490631, guid: 7ef71b12ff8791c47b853437d069e732,
-        type: 3}
-      propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
