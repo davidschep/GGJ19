@@ -1,14 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MouseHome : MonoBehaviour
 {
     public int FoodNeeded { get { return foodNeeded; } }
+    public int GetFood() { return foodCount;}
 
     [SerializeField] private int foodNeeded = 3;
+    [SerializeField] private Camera mouseHomeCamera;
+    [SerializeField] private Transform insideSpawnPoint;
+    [SerializeField] private Transform outsideSpawnPoint;
 
     private int foodCount = 0;
+    private bool playerInside = false;
+
     public void AddFood(int amount)
     {
         foodCount += amount;
@@ -20,7 +24,7 @@ public class MouseHome : MonoBehaviour
 
         InGameUIController.Instance.SetFoodCounter(foodCount);
     }
-    public int GetFood() { return foodCount;}
+
     public void ResetFood()
     {
         // TODO: visualize amount of food in base?
@@ -29,12 +33,41 @@ public class MouseHome : MonoBehaviour
         InGameUIController.Instance.SetFoodCounter(foodCount);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnPlayerHitEntrance()
     {
-        if(other.tag == Tags.Player)
+        if(playerInside)
         {
+            PlayerController.Instance.transform.position = outsideSpawnPoint.position;
+            PlayerController.Instance.SetCameraActivate(true);
+            mouseHomeCamera.gameObject.SetActive(false);
+            PlayerController.Instance.UpdatePlayerBeingInHouse(false);
+        }
+        else
+        {
+            PlayerController.Instance.SetCameraActivate(false);
+            mouseHomeCamera.gameObject.SetActive(true);
+            PlayerController.Instance.transform.position = insideSpawnPoint.position;
             AddFood(PlayerController.Instance.GetFoodAmount());
             PlayerController.Instance.SetFoodAmount(0);
+            PlayerController.Instance.UpdatePlayerBeingInHouse(true);
         }
+
+        playerInside = !playerInside;
+    }
+
+    private void Awake()
+    {
+        mouseHomeCamera.gameObject.SetActive(playerInside);
+        PlayerController.Instance.SetCameraActivate(!playerInside);
+    }
+
+    private void OnEnable()
+    {
+        MouseHouseEntrance.PlayerHitEntranceEvent += OnPlayerHitEntrance;
+    }
+
+    private void OnDisable()
+    {
+        MouseHouseEntrance.PlayerHitEntranceEvent -= OnPlayerHitEntrance;
     }
 }

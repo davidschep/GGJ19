@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CribUI : MonoBehaviour
 {
@@ -15,11 +16,14 @@ public class CribUI : MonoBehaviour
         return instance;
     }
 
-    [SerializeField] private TextMesh foodCounterText;
+    [SerializeField] private List<TextMesh> foodCounterTexts;
     [SerializeField] private MouseHome mouseHome;
 
     public void UpdateFoodCounter(int foodCounter)
     {
-        foodCounterText.text = "Food: " + foodCounter + "/" + mouseHome.FoodNeeded;
+        for (int i = 0; i < foodCounterTexts.Count; i++)
+        {
+            foodCounterTexts[i].text = "Food: " + foodCounter + "/" + mouseHome.FoodNeeded;
+        }
     }
 }

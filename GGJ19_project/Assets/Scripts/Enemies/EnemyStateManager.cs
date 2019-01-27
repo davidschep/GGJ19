@@ -31,9 +31,13 @@ public class EnemyStateManager : MonoBehaviour
     private float checkPlayerVisibilityTimer;
     private bool seePlayer;
     private NavMeshPath navMeshPath;
+    private Animator animator;
+    private EnemyChasingState enemyChasingState;
 
     private void Start()
     {
+        animator = this.GetComponentInChildren<Animator>();
+        enemyChasingState = this.GetComponent<EnemyChasingState>();
         stateMachine = GetComponent<StateMachine>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshPath = new NavMeshPath();
@@ -70,6 +74,9 @@ public class EnemyStateManager : MonoBehaviour
                 chasing = false;
             }
         }
+
+        //Debug.Log(enemyChasingState.moveSpeed + " " + navMeshAgent.velocity.magnitude);
+        animator.SetFloat("Speed", Mathf.Clamp01(navMeshAgent.velocity.magnitude / enemyChasingState.moveSpeed));
     }
 
     private bool CheckSeePlayer()

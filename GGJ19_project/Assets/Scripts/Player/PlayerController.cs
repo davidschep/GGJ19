@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -20,16 +19,19 @@ public class PlayerController : MonoBehaviour
         return instance;
     }
 
-    public Transform CameraTransform { get { return cameraTransform; } }
+    public Camera PlayerCamera { get { return playerCamera; } }
     private NavMeshAgent agent;
     private Rigidbody rb;
 
     [SerializeField] private bool useVelocity = false;
     [SerializeField] private float boostTime = 0.75f;
     [SerializeField] private float boostCooldown = 5;
+    [SerializeField] private float houseSpeed = 3;
     [SerializeField] private float normalSpeed = 15;
     [SerializeField] private float boostSpeed = 25;
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private Transform ro;
+    [SerializeField] private LayerMask layerMask;
 
     private float baseAcceleration;
 
@@ -41,6 +43,20 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine boostCoroutine;
     private float boostCooldownTimer;
+    private bool isInHouse;
+
+    public void UpdatePlayerBeingInHouse(bool isInHouse)
+    {
+        this.isInHouse = isInHouse;
+        if(isInHouse)
+        {
+            agent.speed = houseSpeed;
+        }
+        else
+        {
+            agent.speed = GetNormalSpeed();
+        }
+    }
 
     // food
     [SerializeField] private Transform backpackTransform;
@@ -69,6 +85,11 @@ public class PlayerController : MonoBehaviour
         agent.acceleration = baseAcceleration;
     }
 
+    public void SetCameraActivate(bool enable)
+    {
+        playerCamera.gameObject.SetActive(enable);
+    }
+
     private void Awake()
     {
         agent = this.GetComponent<NavMeshAgent>();
@@ -89,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
         InGameUIController.Instance.SetPlayerBoostCDValue(Mathf.Abs(Mathf.Clamp01(boostCooldownTimer / boostCooldown) - 1));
 
-        if (boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Fire1") > 0.8f || Input.GetAxis("Fire2") > 0.8f)))
+        if (isInHouse && boostCoroutine == null && boostCooldownTimer < 0 && (Input.GetKey(KeyCode.LeftShift) || (Input.GetAxis("Boost1") > 0.8f || Input.GetAxis("Boost2") > 0.8f)))
         {
             boostCooldownTimer = boostCooldown;
             boostCoroutine = StartCoroutine(Boost());
@@ -116,7 +137,7 @@ public class PlayerController : MonoBehaviour
 
     void PointMove(float horizontal, float vertical)
     {
-        if ((horizontal != 0 || vertical != 0) || !useVelocity)
+        if (playerCamera.enabled && ((horizontal != 0 || vertical != 0) || !useVelocity))
         {
             //Create input vector, normalize in case of diagonal movement.
             Vector3 input = new Vector3(horizontal, 0, vertical);
@@ -126,7 +147,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Get camera rotation without up/down angle, only left/right.
-            Vector3 angles = Camera.main.transform.rotation.eulerAngles;
+            Vector3 angles = playerCamera.transform.rotation.eulerAngles;
             angles.x = 0;
             Quaternion rotation = Quaternion.Euler(angles);
 
@@ -147,7 +168,14 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                agent.SetDestination(this.transform.position + direction + Vector3.up);
+                if(Physics.Raycast(ro.position, this.transform.forward, 1.0f, layerMask))
+                {
+                    agent.SetDestination(this.transform.position + direction + Vector3.up);
+                }
+                else
+                {
+                    agent.SetDestination(this.transform.position + direction);
+                }
             }
         }
     }
