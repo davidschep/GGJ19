@@ -8,11 +8,15 @@ ModelImporter:
     100004: Cylinder
     100006: //RootNode
     100008: Plane.006
+    100010: Cube.023
+    100012: Sphere.003
     400000: Cube.021
     400002: Cube.022
     400004: Cylinder
     400006: //RootNode
     400008: Plane.006
+    400010: Cube.023
+    400012: Sphere.003
     2100000: sheet
     2100002: pink
     2100004: lambert1.001
@@ -20,18 +24,29 @@ ModelImporter:
     2100008: Wood
     2100010: gray
     2100012: Old Metal
+    2100014: WoodDark
+    2100016: Rope
+    2100018: Sand
+    2100020: Sheet2
+    2100022: Sheet3
     2300000: Cube.021
     2300002: Cube.022
     2300004: Cylinder
     2300006: Plane.006
+    2300008: Cube.023
+    2300010: Sphere.003
     3300000: Cube.021
     3300002: Cube.022
     3300004: Cylinder
     3300006: Plane.006
+    3300008: Cube.023
+    3300010: Sphere.003
     4300000: Plane.006
     4300002: Cube.022
     4300004: Cube.021
     4300006: Cylinder
+    4300008: Sphere.003
+    4300010: Cube.023
   externalObjects: {}
   materials:
     importMaterials: 1
