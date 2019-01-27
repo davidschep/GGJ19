@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoChaseDistance: 3.5
-  distanceToSeePlayer: 10000
+  distanceToSeePlayer: 90
   angleToSeePlayer: -0.562
   abandonChaseTime: 2.5
   playerBlockVisibilityLayerMask:
