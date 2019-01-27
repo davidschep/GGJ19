@@ -503,14 +503,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24300e7d294e1f046a35e4f27f33b589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: ef777846586723c4e8863eac85bbd398, type: 3}
   catNearbyMusic: {fileID: 8300000, guid: 1c6b319ffe73b6a439571661d45d84d4, type: 3}
   catChaseMusic: {fileID: 8300000, guid: 1972b10bb6a53864bae191ffed97c343, type: 3}
   maxMusicVolume: 0.5
-  backgroundMusicVolume: 0.5
-  minNearbyMusicDistanceCat: 40
-  maxNearbyMusicDistanceCat: 110
-  playBackgroundMusic: 0
+  backgroundMusicVolume: 0.4
+  minNearbyMusicDistanceCat: 50
+  maxNearbyMusicDistanceCat: 100
+  playBackgroundMusic: 1
   pickupClip: {fileID: 8300000, guid: 935bc954bdca9694d8b266bcd7b48dd4, type: 3}
   spottedClip: {fileID: 8300000, guid: 20f53e0a18a915e4eb13749464c1c3b5, type: 3}
   homeFanfareClip: {fileID: 8300000, guid: 0b09830377b560348abafda7e7d5d120, type: 3}
