@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Boost()
     {
+        AudioController.Instance.PlayOneShot(SoundEffectType.BOOST);
         float previousAcceleration = agent.acceleration;
         agent.acceleration = 100000;
         agent.speed = GetBoostSpeed();

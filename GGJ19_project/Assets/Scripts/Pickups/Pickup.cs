@@ -53,6 +53,7 @@ public class Pickup : MonoBehaviour
     {
         if (other.tag == Tags.Player)
         {
+            AudioController.Instance.PlayOneShot(SoundEffectType.PICKUP);
             PlayerController.Instance.SetFoodAmount(PlayerController.Instance.GetFoodAmount() + 1);
             gameObject.SetActive(false);
         }

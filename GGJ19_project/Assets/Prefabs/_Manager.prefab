@@ -513,7 +513,12 @@ MonoBehaviour:
   playBackgroundMusic: 1
   pickupClip: {fileID: 8300000, guid: 935bc954bdca9694d8b266bcd7b48dd4, type: 3}
   spottedClip: {fileID: 8300000, guid: 20f53e0a18a915e4eb13749464c1c3b5, type: 3}
-  homeFanfareClip: {fileID: 8300000, guid: 0b09830377b560348abafda7e7d5d120, type: 3}
+  homeFanfareClips:
+  - {fileID: 8300000, guid: 4d9e5c40f0479a348a6d68bedbeafff5, type: 3}
+  - {fileID: 8300000, guid: 0f049f38211c44b4aad7e23e0aaefe7b, type: 3}
+  - {fileID: 8300000, guid: 4f144ca57274d7545a82d527bfd54fab, type: 3}
+  gameoverClip: {fileID: 8300000, guid: 2e53303342bfaf84fabdecd8335f6c47, type: 3}
+  boostClip: {fileID: 8300000, guid: 0a3b6fbb60bfbac4a848490e99a0ce8b, type: 3}
   backgroundMusicAudioSource: {fileID: 1439375512}
   musicAudioSource: {fileID: 2033829413}
   effectAudioSource: {fileID: 186680367}
